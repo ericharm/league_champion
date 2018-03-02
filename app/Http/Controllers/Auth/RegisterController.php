@@ -64,6 +64,16 @@ class RegisterController extends Controller
      */
     protected function create(Request $request) {
         $data = $request->all();
+
+        $validator = $this->validator($data);
+
+        if ($validator->fails()) {
+          return response()->json([
+            'status' => 'failed',
+            'errors' => $validator->errors() 
+          ], 400);
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -71,6 +81,7 @@ class RegisterController extends Controller
         ]);
 
         return response()->json([
+          'status' => 'success',
           'user' => $user
         ], 201);
     }

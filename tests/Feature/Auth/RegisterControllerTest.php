@@ -13,14 +13,33 @@ class RegistrationsControllerTest extends TestCase {
     }
 
     public function testCreateRegistration() {
+        $name = $this->faker->name;
+        $password = $this->faker->password;
         $regAttempt = [
-          'name' => $this->faker->name,
+          'name' => $name,
           'email' => $this->faker->unique()->safeEmail,
-          'password' => $this->faker->password
+          'password' => $password,
+          'password_confirmation' => $password
         ];
 
         $response = $this->post('/api/register', $regAttempt);
-        error_log(strip_tags($response->getContent()));
+        $reg = \App\User::orderBy('id', 'desc')->first();
+        
         $response->assertStatus(201);
+        $this->assertEquals($name, $reg->name);
+        $this->assertContains($name, $response->getContent());
+    }
+
+    public function testMissingPassword() {
+        $name = $this->faker->name;
+        $regAttempt = [
+          'name' => $name,
+          'email' => $this->faker->unique()->safeEmail
+        ];
+
+        $response = $this->post('/api/register', $regAttempt);
+        $response->assertStatus(400);
+        $this->assertContains('The password field is required.',
+          $response->getContent());
     }
 }
