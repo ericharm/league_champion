@@ -15,7 +15,6 @@ class LeaguesControllerTest extends TestCase
     public function testGetLeagues()
     {
         $response = $this->get('/api/leagues');
-
         $response->assertStatus(200);
     }
 }
