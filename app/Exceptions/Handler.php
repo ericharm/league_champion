@@ -42,7 +42,8 @@ class Handler extends ExceptionHandler
         parent::report($exception);
     }
 
-    private function return500(Exception $exception) {
+    private function return500(Exception $exception)
+    {
         return response()->json([
             'status' => 'failed',
             'exception' => get_class($exception),
