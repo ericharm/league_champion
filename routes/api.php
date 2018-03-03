@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+    // return $request->user();
+// });
 
-Route::post('register', 'Auth\RegisterController@create');
+Route::post('register', 'Auth\RegisterController@create')->name('register');
+
+Route::post('login', 'Auth\LoginController@login')->name('login');
 
 Route::resource('leagues', 'LeaguesController', ['except' => [
     'create', 'edit'

@@ -8,8 +8,7 @@ use App\League;
 
 class LeaguesController extends Controller
 {
-  public function index()
-  {
+  public function index() {
     $leagues = League::all();
 
     return response()->json([
@@ -17,8 +16,7 @@ class LeaguesController extends Controller
     ], 200);
   }
 
-  public function store(Request $request)
-  {
+  public function store(Request $request) {
     $league = League::create($request->all());
 
     return response()->json([
@@ -41,8 +39,7 @@ class LeaguesController extends Controller
     ], 200);
   }
 
-  public function update(Request $request, $id)
-  {
+  public function update(Request $request, $id) {
     $league = League::findOrFail($id);
     $input = $request->all();
     $league->update($input);
@@ -52,7 +49,6 @@ class LeaguesController extends Controller
     ], 202);
   }
 
-  public function destroy($id)
-  {
+  public function destroy($id) {
   }
 }
