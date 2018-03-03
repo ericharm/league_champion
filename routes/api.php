@@ -25,8 +25,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')
   ->name('password.reset');
 
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
-  ->name('forgot-password');
+  ->name('password.email');
 
 Route::resource('leagues', 'LeaguesController', ['except' => [
     'create', 'edit'
 ]]);
+
+// Auth::routes();

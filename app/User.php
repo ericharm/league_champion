@@ -27,4 +27,8 @@ class User extends Authenticatable implements CanResetPassword {
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+    public function isSoCool() {
+        return true;
+    }
 }

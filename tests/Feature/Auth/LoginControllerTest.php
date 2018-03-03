@@ -9,6 +9,8 @@ use Faker\Factory as Faker;
 use App\User;
 
 class LoginControllerTest extends TestCase {
+    use RefreshDatabase;
+
     public function setUp() {
         parent::setUp();
         $this->faker = Faker::create();
