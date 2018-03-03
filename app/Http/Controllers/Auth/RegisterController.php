@@ -68,10 +68,10 @@ class RegisterController extends Controller
         $validator = $this->validator($data);
 
         if ($validator->fails()) {
-          return response()->json([
-            'status' => 'failed',
-            'errors' => $validator->errors() 
-          ], 400);
+            return response()->json([
+                'status' => 'failed',
+                'errors' => $validator->errors() 
+            ], 400);
         }
 
         $user = User::create([
@@ -82,8 +82,8 @@ class RegisterController extends Controller
         ]);
 
         return response()->json([
-          'status' => 'success',
-          'user' => $user
+            'status' => 'success',
+            'user' => $user
         ], 201);
     }
 }

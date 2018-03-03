@@ -40,11 +40,11 @@ class Handler extends ExceptionHandler
     }
 
     private function return500(Exception $exception) {
-      return response()->json([
-        'status' => 'failed',
-        'exception' => get_class($exception),
-        'message' => $exception->getMessage()
-      ], 500);
+        return response()->json([
+            'status' => 'failed',
+            'exception' => get_class($exception),
+            'message' => $exception->getMessage()
+        ], 500);
     }
 
     /**
@@ -57,9 +57,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-          return response()->json(['status' => 'failed', 'exception' => 'NotFoundHttpException'], 404);
+            return response()->json(['status' => 'failed', 'exception' => 'NotFoundHttpException'], 404);
         } else {
-          return $this->return500($exception);
+            return $this->return500($exception);
         }
 
         return parent::render($request, $exception);

@@ -15,7 +15,7 @@ class LoginControllerTest extends TestCase {
         $this->password = $this->faker->password;
 
         $this->user = factory(User::class)->create([
-          'password' => Hash::make($this->password)
+            'password' => Hash::make($this->password)
         ]);
     }
 
@@ -23,8 +23,8 @@ class LoginControllerTest extends TestCase {
     {
         $password = $this->password;
         $loginAttempt = [
-          'email' => $this->user->email,
-          'password' => $this->password
+            'email' => $this->user->email,
+            'password' => $this->password
         ];
         $response = $this->post('/api/login', $loginAttempt);
         $user = json_decode($response->getContent())->user;
@@ -37,8 +37,8 @@ class LoginControllerTest extends TestCase {
     {
         $password = $this->password;
         $loginAttempt = [
-          'email' => $this->user->email,
-          'password' => 'abcdefg'
+            'email' => $this->user->email,
+            'password' => 'abcdefg'
         ];
 
         $response = $this->post('/api/login', $loginAttempt);
@@ -50,7 +50,7 @@ class LoginControllerTest extends TestCase {
     {
         $password = $this->password;
         $loginAttempt = [
-          'email' => $this->user->email
+            'email' => $this->user->email
         ];
 
         $response = $this->post('/api/login', $loginAttempt);
@@ -62,8 +62,8 @@ class LoginControllerTest extends TestCase {
     {
         $password = $this->password;
         $loginAttempt = [
-          'email' => $this->user->email,
-          'drowssap' => $this->password
+            'email' => $this->user->email,
+            'drowssap' => $this->password
         ];
 
         $response = $this->post('/api/login', $loginAttempt);

@@ -18,6 +18,6 @@ class LeaguesControllerTest extends TestCase
         $response = $this->get('/api/leagues');
         $response->assertStatus(200);
         $this->assertContains($this->league->name,
-          $response->getContent());
+            $response->getContent());
     }
 }

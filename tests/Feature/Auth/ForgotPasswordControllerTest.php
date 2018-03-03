@@ -18,18 +18,18 @@ class ForgotPasswordControllerTest extends TestCase {
         $this->password = $this->faker->password;
 
         $this->user = factory(User::class)->create([
-          'password' => Hash::make($this->password)
+            'password' => Hash::make($this->password)
         ]);
     }
 
     public function testForgotPassword() {
         $response = $this->post('/api/password/email', [
             'email' => $this->user->email,
-          ]
-        );
+        ]);
+
         $this->seeMessageFor($this->user->email);
         $this->assertContains('We have e-mailed your password reset link!',
-          $response->getContent());
+            $response->getContent());
         $response->assertStatus(200);
     }
 }
