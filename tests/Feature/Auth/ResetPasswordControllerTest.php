@@ -32,8 +32,7 @@ class ResetPasswordControllerTest extends TestCase {
     }
 
     public function testResetPassword() {
-        $user = User::find($this->user->id);
-        $oldPassword = $user->password;
+        $oldPassword = $this->user->password;
         $newPassword = str_random(10);
         $token = $this->getResetToken();
         $response = $this->post('/api/password/reset', [
@@ -46,5 +45,35 @@ class ResetPasswordControllerTest extends TestCase {
 
         $response->assertStatus(200);
         $this->assertNotEquals($oldPassword, $updatedPassword);
+    }
+
+    public function testResetPasswordConfirmDoesntMatch() {
+        $newPassword = str_random(10);
+        $token = $this->getResetToken();
+        $response = $this->post('/api/password/reset', [
+            'email' => $this->user->email,
+            'token' => $token,
+            'password' => $newPassword,
+            'password_confirmation' => $newPassword . 'a'
+        ]);
+
+        $response->assertStatus(500);
+        $this->assertContains('The given data was invalid.',
+            $response->getContent());
+    }
+
+    public function testResetPasswordBadToken() {
+        $newPassword = str_random(10);
+        $token = $this->getResetToken();
+        $response = $this->post('/api/password/reset', [
+            'email' => $this->user->email,
+            'token' => $token . 'a',
+            'password' => $newPassword,
+            'password_confirmation' => $newPassword
+        ]);
+
+        $response->assertStatus(400);
+        $this->assertContains('This password reset token is invalid.',
+            $response->getContent());
     }
 }
