@@ -10,6 +10,8 @@ $ `cd league_champion`
 
 - set up your test database in .env.testing
 
+$ `composer install`
+
 $ `php artisan migrate --seed`
 
 $ `phpunit`
