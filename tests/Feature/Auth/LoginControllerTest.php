@@ -26,9 +26,11 @@ class LoginControllerTest extends TestCase {
           'email' => $this->user->email,
           'password' => $this->password
         ];
-
         $response = $this->post('/api/login', $loginAttempt);
+        $user = json_decode($response->getContent())->user;
+
         $response->assertStatus(200);
+        $this->assertNotNull($user->api_token);
     }
 
     public function testLoginWithIncorrectPassword()

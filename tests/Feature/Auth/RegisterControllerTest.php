@@ -23,11 +23,12 @@ class RegistrationsControllerTest extends TestCase {
         ];
 
         $response = $this->post('/api/register', $regAttempt);
-        $reg = \App\User::orderBy('id', 'desc')->first();
+        $user = \App\User::orderBy('id', 'desc')->first();
         
         $response->assertStatus(201);
-        $this->assertEquals($name, $reg->name);
+        $this->assertEquals($name, $user->name);
         $this->assertContains($name, $response->getContent());
+        $this->assertNotNull($user->api_token);
     }
 
     public function testMissingPassword() {

@@ -62,7 +62,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $request) {
+    protected function register(Request $request) {
         $data = $request->all();
 
         $validator = $this->validator($data);

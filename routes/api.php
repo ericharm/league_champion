@@ -17,9 +17,15 @@ use Illuminate\Http\Request;
     // return $request->user();
 // });
 
-Route::post('register', 'Auth\RegisterController@create')->name('register');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::post('login', 'Auth\LoginController@login')->name('login');
+
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')
+  ->name('password.reset');
+
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
+  ->name('forgot-password');
 
 Route::resource('leagues', 'LeaguesController', ['except' => [
     'create', 'edit'

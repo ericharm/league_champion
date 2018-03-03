@@ -39,6 +39,14 @@ class Handler extends ExceptionHandler
         parent::report($exception);
     }
 
+    private function return500(Exception $exception) {
+      return response()->json([
+        'status' => 'failed',
+        'exception' => get_class($exception),
+        'message' => $exception->getMessage()
+      ], 500);
+    }
+
     /**
      * Render an exception into an HTTP response.
      *
@@ -50,15 +58,10 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
           return response()->json(['status' => 'failed', 'exception' => 'NotFoundHttpException'], 404);
+        } else {
+          return $this->return500($exception);
         }
-        if ($exception instanceof \Illuminate\Database\QueryException) {
-          return response()->json([
-            'status' => 'failed',
-            'exception' => 'QueryException',
-            'message' => $exception->getMessage()
-          ], 500);
-        }
+
         return parent::render($request, $exception);
-        // return response()->json(['message' => $exception->getMessage()]);
     }
 }
