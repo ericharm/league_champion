@@ -12,6 +12,10 @@ class BroadcastServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function boot()
     {
         Broadcast::routes();
