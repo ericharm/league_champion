@@ -10,6 +10,7 @@ use App\User;
 use MailThief\Testing\InteractsWithMail;
 
 class ForgotPasswordControllerTest extends TestCase {
+    use RefreshDatabase;
     use InteractsWithMail;
 
     public function setUp() {
