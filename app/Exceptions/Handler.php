@@ -51,6 +51,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
           return response()->json(['status' => 'failed', 'exception' => 'NotFoundHttpException'], 404);
         }
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+          return response()->json([
+            'status' => 'failed',
+            'exception' => 'QueryException',
+            'message' => $exception->getMessage()
+          ], 500);
+        }
         return parent::render($request, $exception);
         // return response()->json(['message' => $exception->getMessage()]);
     }
