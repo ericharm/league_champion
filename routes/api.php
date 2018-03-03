@@ -31,4 +31,3 @@ Route::resource('leagues', 'LeaguesController', ['except' => [
     'create', 'edit'
 ]]);
 
-// Auth::routes();
