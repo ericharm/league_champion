@@ -4,13 +4,13 @@ $ `git clone https://github.com/ericharm/league_champion`
 
 $ `cd league_champion`
 
+$ `composer install`
+
 - create a database and a test database
 
 - set up your database in .env
 
 - set up your test database in .env.testing
-
-$ `composer install`
 
 $ `php artisan migrate --seed`
 
