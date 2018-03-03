@@ -1,4 +1,8 @@
-this is currently a base laravel project with basic user auth and tests for Laravel's native Auth controllers
+This is currently a base Laravel project with basic user auth and tests for Laravel's native Auth controllers
+
+$ `git clone https://github.com/ericharm/league_champion`
+
+$ `cd league_champion`
 
 - create a database and a test database
 
