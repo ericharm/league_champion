@@ -12,6 +12,7 @@ class LeaguesController extends Controller
         $leagues = League::all();
 
         return response()->json([
+            'status' => 'success',
             'leagues' => $leagues
         ], 200);
     }
@@ -20,6 +21,7 @@ class LeaguesController extends Controller
         $league = League::create($request->all());
 
         return response()->json([
+            'status' => 'success',
             'league' => $league
         ], 201);
     }
@@ -35,6 +37,7 @@ class LeaguesController extends Controller
         }
 
         return response()->json([
+            'status' => 'success',
             'league' => $league
         ], 200);
     }
@@ -45,10 +48,18 @@ class LeaguesController extends Controller
         $league->update($input);
 
         return response()->json([
+            'status' => 'success',
             'league' => $league
         ], 202);
     }
 
     public function destroy($id) {
+        $league = League::find($id);
+        $league->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'League \'' . $league->name . '\' successfully deleted.'
+        ], 202);
     }
 }

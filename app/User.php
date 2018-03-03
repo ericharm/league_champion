@@ -28,7 +28,4 @@ class User extends Authenticatable implements CanResetPassword {
         'password', 'remember_token'
     ];
 
-    public function isSoCool() {
-        return true;
-    }
 }
